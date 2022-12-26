@@ -817,11 +817,11 @@ PrefabInstance:
       objectReference: {fileID: 109810785}
     - target: {fileID: 4687642624872996192, guid: e8d20f9ba59601f4e96ce4a2923b3cea, type: 3}
       propertyPath: pattern1Time
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4687642624872996192, guid: e8d20f9ba59601f4e96ce4a2923b3cea, type: 3}
       propertyPath: pattern2Time
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4687642624872996192, guid: e8d20f9ba59601f4e96ce4a2923b3cea, type: 3}
       propertyPath: pattern3Time
