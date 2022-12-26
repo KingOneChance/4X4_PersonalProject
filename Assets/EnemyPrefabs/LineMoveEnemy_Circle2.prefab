@@ -116,4 +116,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   axis: 0
-  moveSpeed: 2
+  moveSpeed: 0.02

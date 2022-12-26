@@ -8,7 +8,7 @@ public class LineMoveBase : MonoBehaviour
 {
     [SerializeField] protected ObjectType type;
     [SerializeField] protected MoveDir axis;
-    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float moveSpeed=0.01f;
     protected enum MoveDir
     {
         xRight,
@@ -21,7 +21,7 @@ public class LineMoveBase : MonoBehaviour
         type = ObjectType.PointBlock;
         SelectMoveDIr();
         EnemyLineMove();
-        moveSpeed = 20;
+       // moveSpeed = 20;
     }
     private void OnEnable()
     {
@@ -70,15 +70,16 @@ public class LineMoveBase : MonoBehaviour
     {
         StartCoroutine(CO_EnemyLineMove());
     }
+    WaitForFixedUpdate time = new WaitForFixedUpdate();
     protected virtual IEnumerator CO_EnemyLineMove()
     {
         while (true)
         {
-            if (axis == MoveDir.xRight) gameObject.transform.Translate(Vector2.right * Time.deltaTime * moveSpeed);
-            else if (axis == MoveDir.xLeft) gameObject.transform.Translate(Vector2.left * Time.deltaTime * moveSpeed);
-            else if (axis == MoveDir.yUP) gameObject.transform.Translate(Vector2.up * Time.deltaTime * moveSpeed);
-            else if (axis == MoveDir.yDown) gameObject.transform.Translate(Vector2.down * Time.deltaTime * moveSpeed);
-            yield return new WaitForSeconds(0.01f);
+            if (axis == MoveDir.xRight) gameObject.transform.Translate(Vector2.right * moveSpeed);
+            else if (axis == MoveDir.xLeft) gameObject.transform.Translate(Vector2.left  * moveSpeed);
+            else if (axis == MoveDir.yUP) gameObject.transform.Translate(Vector2.up * moveSpeed);
+            else if (axis == MoveDir.yDown) gameObject.transform.Translate(Vector2.down * moveSpeed);
+            yield return time;
 
             if (gameObject.transform.position.x > 11 || gameObject.transform.position.x < -11 || gameObject.transform.position.y > 11 || gameObject.transform.position.y < -11)
                 break;

@@ -24,15 +24,16 @@ public class LineMove3 : LineMoveBase
         }
         return intialPos;
     }
+    WaitForFixedUpdate times = new WaitForFixedUpdate();
     protected override IEnumerator CO_EnemyLineMove()
     {
         while (true)
         {
-            if (axis == MoveDir.xRight) gameObject.transform.Translate(Vector2.right * Time.deltaTime * moveSpeed);
-            else if (axis == MoveDir.xLeft) gameObject.transform.Translate(Vector2.left * Time.deltaTime * moveSpeed);
-            else if (axis == MoveDir.yUP) gameObject.transform.Translate(Vector2.right * Time.deltaTime * moveSpeed);
-            else if (axis == MoveDir.yDown) gameObject.transform.Translate(Vector2.left * Time.deltaTime * moveSpeed);
-            yield return new WaitForSeconds(0.01f);
+            if (axis == MoveDir.xRight) gameObject.transform.Translate(Vector2.right  * moveSpeed);
+            else if (axis == MoveDir.xLeft) gameObject.transform.Translate(Vector2.left * moveSpeed);
+            else if (axis == MoveDir.yUP) gameObject.transform.Translate(Vector2.right  * moveSpeed);
+            else if (axis == MoveDir.yDown) gameObject.transform.Translate(Vector2.left  * moveSpeed);
+            yield return times;
 
             if (gameObject.transform.position.x > 11 || gameObject.transform.position.x < -11 || gameObject.transform.position.y > 11 || gameObject.transform.position.y < -11)
                 break;
