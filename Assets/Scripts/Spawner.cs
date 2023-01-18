@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameMgr gameMgr;
-    [SerializeField] private GameObject[] Pattern;
-    [SerializeField] private Text text;
     [SerializeField] private GameObject Boss;
+    [SerializeField] private GameObject[] Pattern;
+    [SerializeField] private GameMgr gameMgr;
     [SerializeField] private Slider percentGage;
+    [SerializeField] private Text text;
     [SerializeField] private float runTime;
     [SerializeField] private float nowTime;
     [SerializeField] private float insttime;
