@@ -33,12 +33,11 @@ public class LineMove3 : LineMoveBase
             else if (axis == MoveDir.xLeft) gameObject.transform.Translate(Vector2.left * moveSpeed);
             else if (axis == MoveDir.yUP) gameObject.transform.Translate(Vector2.right  * moveSpeed);
             else if (axis == MoveDir.yDown) gameObject.transform.Translate(Vector2.left  * moveSpeed);
-            yield return times;
+            yield return new WaitForSeconds(0.01f);
 
             if (gameObject.transform.position.x > 11 || gameObject.transform.position.x < -11 || gameObject.transform.position.y > 11 || gameObject.transform.position.y < -11)
                 break;
         }
-        yield return null;
         gameObject.SetActive(false);
         gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
     }

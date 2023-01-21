@@ -18,7 +18,6 @@ public class Singleton<T> : MonoBehaviour where T : class
                     // Create
                     _instance = new GameObject(typeof(T).ToString(), typeof(T)).GetComponent<T>();
                 }
-
             }
             return _instance;
         }

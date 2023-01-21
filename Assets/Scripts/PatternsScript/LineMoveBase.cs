@@ -19,9 +19,7 @@ public class LineMoveBase : MonoBehaviour
     void Start()
     {
         type = ObjectType.PointBlock;
-        SelectMoveDIr();
-        EnemyLineMove();
-       // moveSpeed = 20;
+      //EnemyLineMove(); ==>이동 코루틴을 시작과 OnEnable 모두 실행시켜서 발생한 문제이다. 속도차이가 발생했었다.
     }
     private void OnEnable()
     {
@@ -79,12 +77,11 @@ public class LineMoveBase : MonoBehaviour
             else if (axis == MoveDir.xLeft) gameObject.transform.Translate(Vector2.left  * moveSpeed);
             else if (axis == MoveDir.yUP) gameObject.transform.Translate(Vector2.up * moveSpeed);
             else if (axis == MoveDir.yDown) gameObject.transform.Translate(Vector2.down * moveSpeed);
-            yield return time;
+            yield return new WaitForSeconds(0.01f);
 
             if (gameObject.transform.position.x > 11 || gameObject.transform.position.x < -11 || gameObject.transform.position.y > 11 || gameObject.transform.position.y < -11)
                 break;
         }
-        yield return null;
         gameObject.SetActive(false);
     }
 }

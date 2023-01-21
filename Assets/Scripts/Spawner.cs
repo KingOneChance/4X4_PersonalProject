@@ -17,14 +17,14 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float pattern2Time;
     [SerializeField] private float pattern3Time;
     List<GameObject> objList = new List<GameObject>();
-    List<GameObject> objPool = new List<GameObject>();
+    List<GameObject> objPool1 = new List<GameObject>();
     List<GameObject> objPool2 = new List<GameObject>();
     List<GameObject> objPool3 = new List<GameObject>();
     [SerializeField] int patternCount = 0;
     bool recycle;
     void Start()
     {
-        insttime = 0.5f;
+        insttime = 1f;
         GameObject pool = new GameObject("Pool1");
         objList.Add(pool);
         StartCoroutine(Co_Pattern(insttime, pattern1Time));
@@ -53,7 +53,7 @@ public class Spawner : MonoBehaviour
     }
     private void Pattern2()
     {
-        insttime = 0.4f;
+        insttime = 0.7f;
         GameObject pool = new GameObject("Pool2");
         objList.Add(pool);
         StartCoroutine(Co_Pattern2(insttime, pattern2Time));
@@ -74,26 +74,26 @@ public class Spawner : MonoBehaviour
         Debug.Log("살려");
         Boss = Instantiate(Pattern[patternCount], gameObject.transform.position, Quaternion.identity);
     }
+    WaitForFixedUpdate initiTime = new WaitForFixedUpdate();
     IEnumerator Co_Pattern(float delayTime, float endTime)
     {
         while (nowTime < endTime)
         {
-            Debug.Log("확인");
             GameObject Enemy;
             recycle = false;
-            if (objPool.Count == 0)
+            if (objPool1.Count == 0)
             {
                 Enemy = Instantiate(Pattern[patternCount], gameObject.transform.position, Quaternion.identity);
                 Enemy.transform.SetParent(objList[patternCount].transform);
-                objPool.Add(Enemy);
+                objPool1.Add(Enemy);
             }
             else
             {
-                for (int i = 0; i < objPool.Count; i++)
+                for (int i = 0; i < objPool1.Count; i++)
                 {
-                    if (objPool[i].activeSelf == false)
+                    if (objPool1[i].activeSelf == false)
                     {
-                        objPool[i].SetActive(true);
+                        objPool1[i].SetActive(true);
                         recycle = true;
                         break;
                     }
@@ -102,19 +102,17 @@ public class Spawner : MonoBehaviour
                 {
                     Enemy = Instantiate(Pattern[patternCount], gameObject.transform.position, Quaternion.identity);
                     Enemy.transform.SetParent(objList[patternCount].transform);
-                    objPool.Add(Enemy);
+                    objPool1.Add(Enemy);
                 }
             }
             yield return new WaitForSeconds(delayTime);
         }
-        yield return null;
         PatternDone();
     }
     IEnumerator Co_Pattern2(float delayTime, float endTime)
     {
         while (nowTime < endTime)
         {
-            Debug.Log("확인");
             GameObject Enemy;
             recycle = false;
             if (objPool2.Count == 0)
@@ -143,14 +141,12 @@ public class Spawner : MonoBehaviour
             }
             yield return new WaitForSeconds(delayTime);
         }
-        yield return null;
         PatternDone();
     }
     IEnumerator Co_Pattern3(float delayTime, float endTime)
     {
         while (nowTime < endTime)
         {
-            Debug.Log("확인");
             GameObject Enemy;
             recycle = false;
             if (objPool3.Count == 0)
@@ -179,7 +175,6 @@ public class Spawner : MonoBehaviour
             }
             yield return new WaitForSeconds(delayTime);
         }
-        yield return null;
         PatternDone();
     }
 }
